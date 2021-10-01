@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
 
       const returnedBlog = await blogService.create(blogObject)
-      
+
       console.log(returnedBlog)
 
       setBlogs(blogs.concat(returnedBlog))
@@ -92,16 +92,16 @@ const App = () => {
         ...blogToChange,
         likes: blogToChange.likes + 1
       }
-      
+
       console.log('blogs before changed: ', blogs)
 
       const updatedBlog = await blogService.update(blogToUpdate.id, changedBlog)
-      
+
       setBlogs(blogs.map(blog => blog.id !== blogToUpdate.id ? blog : updatedBlog))
 
       console.log('blogs after chenge: ', blogs)
     } catch (ex) {
-      setNotificationMessage("something failed")
+      setNotificationMessage('something failed')
       setTimeout(() => {
         setNotificationMessage(null)
       }, 5000)
@@ -116,7 +116,7 @@ const App = () => {
         await blogService.deleteBlog(blogToDelete.id)
         setBlogs(blogs.filter(b => b.id !== blogToBeDelete.id))
       }
-      
+
 
     }catch (ex) {
       console.log(ex)
@@ -124,7 +124,7 @@ const App = () => {
   }
   const loginForm = () => (
     <Togglable buttonLabel='login'>
-      <LoginForm 
+      <LoginForm
         username={username}
         password={password}
         handleUsername={({ target }) => setUsername(target.value)}
@@ -139,7 +139,7 @@ const App = () => {
     //Quitar componente Togglable y regresar a lo anterior
     <Togglable buttonLabel="create new blog" ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
-    </Togglable>  
+    </Togglable>
   )
 
   if(user === null) {
@@ -161,11 +161,11 @@ const App = () => {
         <button onClick={handleLogOut}>logout</button>
         {blogForm()}
         {blogs.map(blog =>
-          <Blog 
+          <Blog
             key={blog.id}
             blog={blog}
             increaseLikes={() => addLike(blog)}
-            deleteBlog={deletingBlog}
+            deleteBlog={() => deletingBlog(blog)}
           />
         )}
       </div>

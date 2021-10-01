@@ -15,8 +15,8 @@ const Blog = ({
     marginBottom: 5,
     display: blogvisible ? 'none' : ''
   }
-  
-  const showWhenVisible = { 
+
+  const showWhenVisible = {
     paddingTop: 10,
     paddingLeft: 2,
     border: 'solid',
@@ -26,16 +26,16 @@ const Blog = ({
   }
 
   return (
-    <div>
+    <div className='blog'>
       <div style={hideWhenVisible}>
         {blog.title} {blog.author}
         <button onClick={() => setBlogVisible(true)}>view</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className="blogView">
         <span>{blog.title} {blog.author}</span>
         <button onClick={() => setBlogVisible(false)}>hide</button>
-        <p>{blog.url}</p>
-        likes <span>{blog.likes}</span>
+        <p className="blogUrl">{blog.url}</p>
+        likes <span className="blogLikes">{blog.likes}</span>
         <button onClick={increaseLikes}>like</button>
         <p>{blog.user.name}</p>
         <button onClick={deleteBlog}>remove</button>
