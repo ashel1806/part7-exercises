@@ -2,8 +2,20 @@ import axios from 'axios'
 const baseUrl = '/api/login'
 
 const login = async credentials => {
-  const response = await axios.post(baseUrl, credentials)
-  return response.data
+  return await axios
+    .post(baseUrl, credentials)
+    .then(res => {
+      if (res.data.token) {
+        //console.log(res.data)
+        localStorage.setItem('loggedBlogAppUser', JSON.stringify(res.data))
+      }
+
+      return res.data
+    })
 }
 
-export default { login } 
+const logout  = () => {
+  localStorage.removeItem('loggedBlogAppUser')
+}
+
+export default { login, logout } 
