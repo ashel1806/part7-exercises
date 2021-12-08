@@ -16,7 +16,7 @@ const Notification = () => {
     return (
       <div className="loggin-fail">
         {text}
-      </div> 
+      </div>
     )
   }
 }

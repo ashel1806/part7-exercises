@@ -27,7 +27,7 @@ const App = () => {
   const dispatch = useDispatch()
   const users = useSelector(state => state.users)
   const { isLoggedIn, user } = useSelector(state => state.login)
-  
+
   console.log(users)
 
   const blogFormRef = React.createRef()
@@ -73,7 +73,6 @@ const App = () => {
     padding: 5
   }
 
-  console.log(users)
   return(
     <Router>
       <div style={navBar}>
@@ -85,9 +84,9 @@ const App = () => {
       </div>
 
       <h2>blog app</h2>
-        
+
       <Notification />
-      
+
       <Switch>
         <Route path="/users/:id">
           <User />

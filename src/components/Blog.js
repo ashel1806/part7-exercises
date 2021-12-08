@@ -1,7 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { likeBlog, deleteBlog } from '../actions/blogs'
+import { likeBlog, deleteBlog, commentBlog } from '../actions/blogs'
+import CommentForm from './CommentForm'
+
+import Comments from './Comments'
 
 const Blog = () => {
   const dispatch = useDispatch()
@@ -9,7 +12,7 @@ const Blog = () => {
   const id = useParams().id
   const blog = useSelector(state => state.blogs.find(b => b.id === id))
   const users = useSelector(state => state.users)
-  
+
   if (!blog) return null
 
   const increaseLikes = () => {
@@ -23,18 +26,28 @@ const Blog = () => {
     }
   }
 
+  const handleComment = (comment) => {
+    dispatch(commentBlog(id, comment))
+  }
+
   const blogOwner = users.find(u => u.username === blog.user.username)
   console.log(blogOwner)
 
   return (
     <div>
-      <h3>{blog.title} {blog.author}</h3>
+      <h2>{blog.title} {blog.author}</h2>
       <a href={blog.url}>{blog.url}</a>
       <p>
         {blog.likes} likes <button onClick={increaseLikes}>likes</button>
       </p>
       <span>added by {blog.user.name}</span>
       { blogOwner && <button onClick={deletingBlog}>delete</button> }
+
+      <Comments comments={blog.comments}>
+        <CommentForm
+          handleComment={handleComment}
+        />
+      </Comments>
     </div>
   )
 }

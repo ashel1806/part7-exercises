@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/login'
+const baseUrl = 'https://blogs-backend-app.herokuapp.com/api/login'
 
 const login = async credentials => {
   return await axios

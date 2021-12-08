@@ -32,7 +32,7 @@ export const createBlog = (content) => {
 
 export const likeBlog = (id, content) => {
   return async dispatch => {
-    const blogLiked = { 
+    const blogLiked = {
       ...content,
       likes: content.likes + 1
     }
@@ -56,9 +56,9 @@ export const deleteBlog = id => {
   }
 }
 
-export const commentBlog = (comment, id) => {
+export const commentBlog = (id, comment) => {
   return async dispatch => {
-    const newComment = await blogService.commentBlog(comment, id)
+    const newComment = await blogService.commentBlog(id, comment)
 
     dispatch({
       type: COMMENT_BLOG,

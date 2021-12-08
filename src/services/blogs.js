@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/blogs'
+const baseUrl = 'https://blogs-backend-app.herokuapp.com/api/blogs'
 
 const user = JSON.parse(localStorage.getItem('loggedBlogAppUser'))
 
@@ -32,8 +32,8 @@ const deleteBlog = async (id) => {
   return response.data
 }
 
-const commentBlog = async (comment, id) => {
-  const response = await axios.put(`${baseUrl}/${id}/comments`, comment)
+const commentBlog = async (id, comment) => {
+  const response = await axios.post(`${baseUrl}/${id}/comments`, { comment }, config)
 
   return response.data
 }

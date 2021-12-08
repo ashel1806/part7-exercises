@@ -20,6 +20,7 @@ const loginReducer = ( state = initialState, action ) => {
         user: action.data.user
       }
     case LOGOUT_APP:
+      localStorage.removeItem('loggedBlogAppUser')
       return {
         ...state,
         isLoggedIn: false,

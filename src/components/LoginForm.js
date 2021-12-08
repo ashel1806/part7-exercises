@@ -23,7 +23,7 @@ const LoginForm = () => {
     } catch (ex) {
       dispatch(setNotification('wrong username or password'), 5)
     }
-  } 
+  }
 
   return (
     <form onSubmit={handleSubmit}>
