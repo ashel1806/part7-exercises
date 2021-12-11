@@ -11,7 +11,7 @@ import blogService from '../services/blogs'
 export const initializeBlogs = () => {
   return async dispatch => {
     const blogs = await blogService.getAll()
-    
+
     dispatch({
       type: INIT_BLOGS,
       data: blogs
@@ -25,7 +25,7 @@ export const createBlog = (content) => {
 
     dispatch({
       type: NEW_BLOG,
-      data: { newBlog }
+      data: newBlog
     })
   }
 }

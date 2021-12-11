@@ -11,9 +11,10 @@ const blogReducer = (state = [], action) => {
     case INIT_BLOGS:
       return action.data
     case NEW_BLOG:
+      //console.log(action.data)
       return [
         ...state,
-        action.data.newBlog
+        action.data
       ]
     case LIKE_BLOG:
       const blogLiked = action.data.blogToLike

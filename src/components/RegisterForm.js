@@ -1,27 +1,34 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
-import { login } from '../actions/login'
+import { registerUser } from '../actions/users'
 import { setNotification } from '../actions/notification'
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const [username, setUsername] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
   const handleUsername = e => { setUsername(e.target.value) }
+  const handleName = e => { setName(e.target.value) }
   const handlePassword = e => { setPassword(e.target.value) }
 
   const handleSubmit = e => {
     e.preventDefault()
 
     try {
-      dispatch(login({ username, password }))
+      dispatch(registerUser({ username, name, password }))
       setUsername('')
+      setName('')
       setPassword('')
-    } catch {
-      dispatch(setNotification('wrong username or password', 5))
+      dispatch(setNotification('user registered succesfull'))
+      history.push('/')
+    } catch (e) {
+      dispatch(setNotification('un campo es incorrecto o vacío', 5))
     }
   }
 
@@ -39,6 +46,17 @@ const LoginForm = () => {
         />
       </div>
       <div>
+        name
+        <input
+          id='name'
+          type="text"
+          value={name}
+          name="Name"
+          onChange={handleName}
+          autoComplete="name"
+        />
+      </div>
+      <div>
         password
         <input
           id='password'
@@ -49,17 +67,9 @@ const LoginForm = () => {
           autoComplete="current-password"
         />
       </div>
-      <button id="login-button" type="submit">login</button>
+      <button id="register-button" type="submit">register</button>
     </form>
   )
 }
 
-export default LoginForm
-
-/*LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsername: PropTypes.func.isRequired,
-  handlePassword: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-}*/
+export default RegisterForm

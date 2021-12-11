@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { likeBlog, deleteBlog, commentBlog } from '../actions/blogs'
-import CommentForm from './CommentForm'
 
+import { likeBlog, deleteBlog, commentBlog } from '../actions/blogs'
+
+import CommentForm from './CommentForm'
 import Comments from './Comments'
 
 const Blog = () => {
@@ -11,7 +12,7 @@ const Blog = () => {
   const history = useHistory()
   const id = useParams().id
   const blog = useSelector(state => state.blogs.find(b => b.id === id))
-  const users = useSelector(state => state.users)
+  const userLogged = useSelector(state => state.login)
 
   if (!blog) return null
 
@@ -26,12 +27,14 @@ const Blog = () => {
     }
   }
 
+  console.log(blog);
   const handleComment = (comment) => {
     dispatch(commentBlog(id, comment))
   }
 
-  const blogOwner = users.find(u => u.username === blog.user.username)
-  console.log(blogOwner)
+  const blogOwner = blog.user.username === userLogged.user.username
+
+  //console.log(blogUser)
 
   return (
     <div>

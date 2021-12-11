@@ -5,6 +5,7 @@ export const DELETE_BLOG = 'DELETE_BLOG'
 export const COMMENT_BLOG = 'COMMENT_BLOG'
 
 export const GET_USERS = 'GET_USERS'
+export const REGISTER_USER = 'REGISTER_USER'
 
 export const LOGIN_APP = 'LOGIN_APP'
 export const LOGOUT_APP = 'LOGOUT_APP'

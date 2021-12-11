@@ -18,4 +18,4 @@ const logout  = () => {
   localStorage.removeItem('loggedBlogAppUser')
 }
 
-export default { login, logout } 
+export default { login, logout }

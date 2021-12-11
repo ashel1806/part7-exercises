@@ -15,6 +15,7 @@ import Togglable from './components/Togglable'
 import Users from './components/Users'
 import User from './components/User'
 import Blogs from './components/Blogs'
+import RegisterForm from './components/RegisterForm'
 
 import './index.css'
 
@@ -53,13 +54,29 @@ const App = () => {
     </Togglable>
   )
 
+  const registerForm = () => (
+    <Togglable buttonLabel='register'>
+      <RegisterForm />
+    </Togglable>
+  )
+
   if(!isLoggedIn) {
     return(
-      <div>
-        <h2>log in to application</h2>
-        <Notification />
-        {loginForm()}
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/register">
+            <h2>Register to application</h2>
+            {registerForm()}
+            <p>¿You have an account? <Link to="/">Sign in</Link></p>
+          </Route>
+          <Route path="/">
+            <h2>log in to application</h2>
+            <Notification />
+            {loginForm()}
+            <p>¿You don´t have an account? <Link to="/register">Sign up</Link></p>
+          </Route>
+        </Switch>
+      </Router>
     )
   }
 
